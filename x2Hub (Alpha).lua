@@ -29,7 +29,8 @@ for i,v in next, games do
 end
 
 for i = 0,#games,1 do
-	if not games[i] then
+
+	if game.GameId~=games[i] and not games[i] then
 		starterGUI:SetCore("SendNotification", {
 			Title = "Error";
 			Text = "Invalid Game";
