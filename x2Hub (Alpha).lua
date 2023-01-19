@@ -28,17 +28,6 @@ for i,v in next, games do
 	end
 end
 
-for i = 0,#games,1 do
-
-	if game.GameId~=games[i] and not games[i] then
-		starterGUI:SetCore("SendNotification", {
-			Title = "Error";
-			Text = "Invalid Game";
-			Duration = 10;
-		})
-	end
-end
-
 --[[
 
 hub made by x2Lazy
@@ -71,11 +60,14 @@ function bindable.OnInvoke(response)
 			local homeFrame, homeFrameRoundify = Instance.new("Frame"), Instance.new("UICorner")
 			local madeByText = Instance.new("TextLabel")
 			local creatorText = Instance.new("TextLabel")
-			local mainGameFrame, mainGameFrameRoundify = Instance.new("Frame"), Instance.new("UICorner")
+			local mainGameFrame, mainGameFrameRoundify = Instance.new("ScrollingFrame"), Instance.new("UICorner")
+			local uiGL= Instance.new("UIGridLayout")
 			local feButton1 = Instance.new("TextButton")
 			local resetBtn = Instance.new("TextButton")
 			local netlessBtn = Instance.new("TextButton")
-			
+			local exitBtn = Instance.new("TextButton")
+			local minimizeBtn = Instance.new("TextButton")
+
 			local P = game:GetService("Players")
 			local userId = player.UserId
 			local thumbType = Enum.ThumbnailType.HeadShot
@@ -122,7 +114,7 @@ function bindable.OnInvoke(response)
 			nameOfHub.Font=Enum.Font.SourceSans
 			nameOfHub.TextScaled=true
 			nameOfHub.TextSize=14
-			
+
 
 			gameLogo.Name="gameLogo"
 			gameLogo.Parent=sideFrame
@@ -201,7 +193,19 @@ function bindable.OnInvoke(response)
 			mainGameFrame.Transparency=0
 			mainGameFrame.BackgroundColor3=Color3.new(0.231373, 0.231373, 0.231373)
 			mainGameFrame.Position=UDim2.new(0.331,0,0.049,0)
-			mainGameFrame.Size=UDim2.new(0, 429,0, 316)
+			mainGameFrame.Size=UDim2.new(0, 429,0, 307)
+			
+			uiGL.Name="layout"
+			uiGL.Parent=mainGameFrame
+			uiGL.CellPadding=UDim2.new(0,5,0,5)
+			uiGL.CellSize=UDim2.new(0,125,0,21)
+			uiGL.FillDirection=Enum.FillDirection.Horizontal
+			uiGL.SortOrder=Enum.SortOrder.LayoutOrder
+			uiGL.VerticalAlignment=Enum.VerticalAlignment.Top
+			uiGL.StartCorner=Enum.StartCorner.TopLeft
+			uiGL.FillDirectionMaxCells=3
+			uiGL.HorizontalAlignment=Enum.HorizontalAlignment.Left
+			
 
 			feButton1.Name="fe_block_button"
 			feButton1.Parent=mainGameFrame
@@ -223,7 +227,7 @@ function bindable.OnInvoke(response)
 			resetBtn.Size=UDim2.new(0,125,0,21)
 			resetBtn.TextColor3=Color3.new(1,1,1)
 			resetBtn.TextScaled=true
-			
+
 			netlessBtn.Name="netless_button"
 			netlessBtn.Parent=mainFrame
 			netlessBtn.Visible = false
@@ -234,6 +238,28 @@ function bindable.OnInvoke(response)
 			netlessBtn.Size=UDim2.new(0,125,0,21)
 			netlessBtn.TextColor3=Color3.new(1,1,1)
 			netlessBtn.TextScaled=true
+			
+			exitBtn.Name="exit_button"
+			exitBtn.Parent=mainFrame
+			exitBtn.Visible = true
+			exitBtn.Text="X"
+			exitBtn.ZIndex=2
+			exitBtn.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.313725)
+			exitBtn.Position=UDim2.new(0.972,0,-0.002,0)
+			exitBtn.Size=UDim2.new(0,19,0,21)
+			exitBtn.TextColor3=Color3.new(1,1,1)
+			exitBtn.TextScaled=true
+			
+			minimizeBtn.Name="minimize_button"
+			minimizeBtn.Parent=mainFrame
+			minimizeBtn.Visible = true
+			minimizeBtn.Text="-"
+			minimizeBtn.ZIndex=2
+			minimizeBtn.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.313725)
+			minimizeBtn.Position=UDim2.new(0.935,0,-0.002,0)
+			minimizeBtn.Size=UDim2.new(0,19,0,21)
+			minimizeBtn.TextColor3=Color3.new(1,1,1)
+			minimizeBtn.TextScaled=true
 
 
 			starterGUI:SetCore("SendNotification", {
@@ -250,6 +276,19 @@ function bindable.OnInvoke(response)
 				if input.KeyCode==Enum.KeyCode.LeftControl then
 					gui:Destroy()
 				end
+			end)
+			
+			exitBtn.MouseButton1Click:Connect(function()
+				gui:Destroy()
+			end)
+			
+			minimizeBtn.MouseButton1Click:Connect(function()
+				moveableFrame.Visible=false
+				starterGUI:SetCore("SendNotification", {
+					Title = "Alert: x2Hub is minimized!";
+					Text="Press Right Control to Maximize hub";
+					Duration = 7;
+				})
 			end)
 
 			--Roundify Buttons
@@ -307,6 +346,10 @@ function bindable.OnInvoke(response)
 			resetBtn.MouseButton1Click:Connect(function()
 				player.Character:BreakJoints()
 			end)
+			
+			local function reanimate()
+				--[[not]]
+			end
 
 			--fe block type shit
 			feButton1.MouseButton1Click:Connect(function()
