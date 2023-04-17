@@ -6,7 +6,7 @@ local getHubVersion = "v1"
 local bindable = Instance.new("BindableFunction")
 local starterGUI = game:GetService("StarterGui")
 local ts = game:GetService("TweenService")
-local games = {4287812296,280343502,1768079756,3319240411,47545}
+local games = {4287812296,280343502,1768079756,3319240411,47545,192800}
 local gameFound=false
 
 for i,v in next, games do
