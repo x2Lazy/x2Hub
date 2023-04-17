@@ -4,7 +4,7 @@ local getHubVersion = "v1"
 local bindable = Instance.new("BindableFunction")
 local starterGUI = game:GetService("StarterGui")
 local ts = game:GetService("TweenService")
-local games = {tonumber("4287812296")--[[x2Hub Game]],tonumber("280343502")--[[Pick A Side]],tonumber("1768079756")--[[just grass]],tonumber("1430993116")--[[literal baseplate]]}
+local games = {4287812296,280343502,1768079756,8743251051}
 local gameFound=false
 
 for i,v in next, games do
