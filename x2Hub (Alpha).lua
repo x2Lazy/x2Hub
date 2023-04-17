@@ -1,5 +1,7 @@
 local player = game:GetService("Players").LocalPlayer
 local playerGui = player.PlayerGui
+
+local coreGui=game:GetService("CoreGui")
 local getHubVersion = "v1"
 local bindable = Instance.new("BindableFunction")
 local starterGUI = game:GetService("StarterGui")
@@ -10,7 +12,7 @@ local gameFound=false
 for i,v in next, games do
 	if game.GameId==v then
 		gameFound=true
-		if not playerGui:FindFirstChild("x2Hub") then
+		if not coreGui:FindFirstChild("x2Hub") then
 			starterGUI:SetCore("SendNotification", {
 				Title = "x2Hub";
 				Text = "Do you want to execute x2Hub version: "..getHubVersion.."?";
@@ -20,10 +22,14 @@ for i,v in next, games do
 				Button2 = "no";
 			})
 		else
+			coreGui:FindFirstChild("x2Hub"):Destroy()
 			starterGUI:SetCore("SendNotification", {
-				Title = "Error";
-				Text = "Already Executed";
-				Duration = 10;
+				Title = "x2Hub";
+				Text = "Do you want to execute x2Hub version: "..getHubVersion.."?";
+				Duration = 40;
+				Callback = bindable;
+				Button1 = "Execute";
+				Button2 = "no";
 			})
 		end
 	end
@@ -55,7 +61,7 @@ function bindable.OnInvoke(response)
 
 		local UserInputService = game:GetService("UserInputService")
 
-		if not playerGui:FindFirstChild("x2Hub") then
+		if not coreGui:FindFirstChild("x2Hub") then
 			local gui = Instance.new("ScreenGui")
 			local moveableFrame = Instance.new("Frame")
 			local mainFrame = Instance.new("Frame")
