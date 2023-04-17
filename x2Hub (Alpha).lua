@@ -209,6 +209,7 @@ function bindable.OnInvoke(response)
 			mainGameFrame.Size=UDim2.new(0, 429,0, 307)
 
 			uiLL.Name="layout"
+			uiLL.Padding=UDim.new(0,10)
 			uiLL.Parent=mainGameFrame
 			uiLL.FillDirection=Enum.FillDirection.Vertical
 			uiLL.SortOrder=Enum.SortOrder.LayoutOrder
@@ -225,7 +226,7 @@ function bindable.OnInvoke(response)
 			avalanche.Size=UDim2.new(0,125,0,21)
 			avalanche.TextColor3=Color3.new(1,1,1)
 			avalanche.TextScaled=true
-			
+
 			workatapizzaplace_tptomanager.Name="waapp_1"
 			workatapizzaplace_tptomanager.Parent=mainGameFrame
 			workatapizzaplace_tptomanager.Text="Work at a Pizza Place (TP To Manager Whatever shit)"
@@ -421,6 +422,11 @@ function bindable.OnInvoke(response)
 				end
 
 				main()
+			end)
+			
+			workatapizzaplace_tptomanager.MouseButton1Click:Connect(function()
+				local managerSeat=game:GetService("Workspace").ManagerChair.Seat
+				player.Character.PrimaryPart:PivotTo(managerSeat.CFrame+CFrame.new(0,10,0))
 			end)
 
 			--Moves Frame
