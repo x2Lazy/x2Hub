@@ -4,11 +4,12 @@ local getHubVersion = "v1"
 local bindable = Instance.new("BindableFunction")
 local starterGUI = game:GetService("StarterGui")
 local ts = game:GetService("TweenService")
-local games = {tonumber("4287812296")--[[x2Hub Game]],tonumber("280343502")--[[Pick A Side]],tonumber("1768079756")--[[just grass]],tonumber("1430993116")--[[literal baseplate]],tonumber("6708206173")}
-
+local games = {tonumber("4287812296")--[[x2Hub Game]],tonumber("280343502")--[[Pick A Side]],tonumber("1768079756")--[[just grass]],tonumber("1430993116")--[[literal baseplate]]}
+local gameFound=false
 
 for i,v in next, games do
 	if game.GameId==v then
+		gameFound=true
 		if not playerGui:FindFirstChild("x2Hub") then
 			starterGUI:SetCore("SendNotification", {
 				Title = "x2Hub";
@@ -19,25 +20,25 @@ for i,v in next, games do
 				Button2 = "no";
 			})
 		else
-			playerGui:FindFirstChild("x2Hub"):Destroy()
 			starterGUI:SetCore("SendNotification", {
-				Title = "x2Hub";
-				Text = "Do you want to execute x2Hub version: "..getHubVersion.."?";
-				Duration = 40;
-				Callback = bindable;
-				Button1 = "Execute";
-				Button2 = "no";
+				Title = "Error";
+				Text = "Already Executed";
+				Duration = 10;
 			})
 		end
-	else
-		print("not")
 	end
 end
 
+if gameFound==false then
+	starterGUI:SetCore("SendNotification", {
+		Title = "Manager";
+		Text = "Game not supported yet. If you want a script for this game message me!";
+		Duration = 15;
+	})
+end
+
 --[[
-
 hub made by x2Lazy
-
 ]]
 
 function bindable.OnInvoke(response)
@@ -48,6 +49,9 @@ function bindable.OnInvoke(response)
 			Text="may take a while. . .";
 			Duration = 2;
 		})
+
+
+		wait(3)
 
 		local UserInputService = game:GetService("UserInputService")
 
@@ -60,13 +64,12 @@ function bindable.OnInvoke(response)
 			local gameLogo, gameLogoRoundify = Instance.new("ImageLabel"), Instance.new("UICorner")
 			local homeButton = Instance.new("TextButton")
 			local mainButton = Instance.new("TextButton")
-			local universalButton = Instance.new("TextButton")
 			local homeFrame, homeFrameRoundify = Instance.new("Frame"), Instance.new("UICorner")
-			local madeByText = Instance.new("TextLabel")
-			local creatorText = Instance.new("TextLabel")
+			local welcomingText = Instance.new("TextLabel")
+			local subjectText = Instance.new("TextLabel")
 			local mainGameFrame, mainGameFrameRoundify = Instance.new("ScrollingFrame"), Instance.new("UICorner")
 			local uiLL= Instance.new("UIListLayout")
-			local button1 = Instance.new("TextButton")
+			local avalanche = Instance.new("TextButton")
 			local resetBtn = Instance.new("TextButton")
 			local exitBtn = Instance.new("TextButton")
 			local minimizeBtn = Instance.new("TextButton")
@@ -144,6 +147,7 @@ function bindable.OnInvoke(response)
 
 
 			mainButton.Name="main_button"
+			mainButton.Text="Script Dump"
 			mainButton.Parent=sideFrame
 			mainButton.BackgroundTransparency=0
 			mainButton.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.34902)
@@ -154,19 +158,7 @@ function bindable.OnInvoke(response)
 			mainButton.Font=Enum.Font.SourceSans
 			mainButton.TextScaled=true
 			mainButton.TextSize=14
-			
-			universalButton.Name="universal_button"
-			universalButton.Text="Universal"
-			universalButton.Parent=sideFrame
-			universalButton.BackgroundTransparency=0
-			universalButton.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.34902)
-			universalButton.ZIndex=2
-			universalButton.Position=UDim2.new(0.081, 0,0.472, 0)
-			universalButton.Size=UDim2.new(0,161,0,29)
-			universalButton.TextColor3=Color3.new(1, 1, 1)
-			universalButton.Font=Enum.Font.SourceSans
-			universalButton.TextScaled=true
-			universalButton.TextSize=14
+
 
 			homeFrame.Name="home_frame"
 			homeFrame.Parent=mainFrame
@@ -177,27 +169,27 @@ function bindable.OnInvoke(response)
 			homeFrame.Position=UDim2.new(0.331,0,0.049,0)
 			homeFrame.Size=UDim2.new(0,439,0,128)
 
-			madeByText.Name="made_by_text"
-			madeByText.Text="Made By"
-			madeByText.Parent=homeFrame
-			madeByText.BackgroundTransparency=1
-			madeByText.ZIndex=1
-			madeByText.Font=Enum.Font.SourceSans
-			madeByText.TextScaled=true
-			madeByText.TextColor3=Color3.new(1,1,1)
-			madeByText.Position=UDim2.new(0.266, 0,0, 0)
-			madeByText.Size=UDim2.new(0,200,0,50)
+			welcomingText.Name="Welcome_text"
+			welcomingText.Text="Welcome: "
+			welcomingText.Parent=homeFrame
+			welcomingText.BackgroundTransparency=1
+			welcomingText.ZIndex=1
+			welcomingText.Font=Enum.Font.SourceSans
+			welcomingText.TextScaled=true
+			welcomingText.TextColor3=Color3.new(1,1,1)
+			welcomingText.Position=UDim2.new(0.266, 0,0, 0)
+			welcomingText.Size=UDim2.new(0,200,0,50)
 
-			creatorText.Name="game_creator_text"
-			creatorText.Text="x2Lazy"
-			creatorText.Parent=homeFrame
-			creatorText.BackgroundTransparency=1
-			creatorText.ZIndex=1
-			creatorText.Font=Enum.Font.SourceSans
-			creatorText.TextScaled=true
-			creatorText.TextColor3=Color3.new(1,1,1)
-			creatorText.Position=UDim2.new(0.266,0,0.469,0)
-			creatorText.Size=UDim2.new(0,200,0,50)
+			subjectText.Name="subject_text"
+			subjectText.Text=player.Name.."(@"..player.DisplayName..")"
+			subjectText.Parent=homeFrame
+			subjectText.BackgroundTransparency=1
+			subjectText.ZIndex=1
+			subjectText.Font=Enum.Font.SourceSans
+			subjectText.TextScaled=true
+			subjectText.TextColor3=Color3.new(1,1,1)
+			subjectText.Position=UDim2.new(0.266,0,0.469,0)
+			subjectText.Size=UDim2.new(0,200,0,50)
 
 			mainGameFrame.Name="main_game_frame"
 			mainGameFrame.Parent=mainFrame
@@ -211,23 +203,21 @@ function bindable.OnInvoke(response)
 
 			uiLL.Name="layout"
 			uiLL.Parent=mainGameFrame
-			uiLL.CellPadding=UDim2.new(0,5,0,5)
-			uiLL.CellSize=UDim2.new(0,125,0,21)
 			uiLL.FillDirection=Enum.FillDirection.Vertical
 			uiLL.SortOrder=Enum.SortOrder.LayoutOrder
 			uiLL.VerticalAlignment=Enum.VerticalAlignment.Top
 			uiLL.HorizontalAlignment=Enum.HorizontalAlignment.Center
 
 
-			button1.Name="button1"
-			button1.Parent=mainGameFrame
-			button1.Text="Pick A Side ()"
-			button1.ZIndex=2
-			button1.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.313725)
-			button1.Position=UDim2.new(0.037, 0,0.036, 0)
-			button1.Size=UDim2.new(0,125,0,21)
-			button1.TextColor3=Color3.new(1,1,1)
-			button1.TextScaled=true
+			avalanche.Name="Avalanche Game Bullshit"
+			avalanche.Parent=mainGameFrame
+			avalanche.Text="Pick A Side Bullshit"
+			avalanche.ZIndex=2
+			avalanche.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.313725)
+			avalanche.Position=UDim2.new(0.037, 0,0.036, 0)
+			avalanche.Size=UDim2.new(0,125,0,21)
+			avalanche.TextColor3=Color3.new(1,1,1)
+			avalanche.TextScaled=true
 
 			resetBtn.Name="reset_button"
 			resetBtn.Parent=mainFrame
@@ -268,20 +258,6 @@ function bindable.OnInvoke(response)
 				Text="";
 				Duration = 1;
 			})
-			
-			if game.GameId==games[2] then
-				mainButton.Text="Pick A Side"
-			end
-			
-			if mainButton.Text=="Pick A Side" then
-				for i,v in pairs(mainGameFrame:GetDescendants()) do
-					if v:IsA("TextButton") then
-						if not string.find(v.Text,"Pick") then
-							v.Visible=false
-						end
-					end
-				end
-			end
 
 			--close application
 			UserInputService.InputBegan:Connect(function(input)
@@ -360,9 +336,74 @@ function bindable.OnInvoke(response)
 				player.Character:BreakJoints()
 			end)
 
-			--auto catch type shit
-			button1.MouseButton1Click:Connect(function()
-				--[[]]
+
+			--Avalanche
+			avalanche.MouseButton1Click:Connect(function()
+				local p_forscript=game:GetService("Players").LocalPlayer
+				local starterGUI = game:GetService("StarterGui")
+				local isTrue=false
+
+				starterGUI:SetCore("SendNotification", {
+					Title = "x2Hub Avalanch AutoWin Script";
+					Text = "executing (execute before match)";
+					Duration = 10;
+				})
+
+				local function main()
+					local ve
+					starterGUI:SetCore("SendNotification", {
+						Title = "Manager";
+						Text = "Waiting for match to start";
+						Duration = 10;
+					})
+					repeat task.wait() until p_forscript.PlayerGui.Hud.GameTimer.Text=="02:59"
+					while task.wait(1) do
+						for i,v in pairs(game:GetService("Workspace").ActiveMap:GetDescendants()) do
+							if v:IsA("MeshPart") and v.Name=="Finish" then
+								ve=v
+								isTrue=true
+								starterGUI:SetCore("SendNotification", {
+									Title = "Manager";
+									Text = "found: "..v.Name;
+									Duration = 5;
+								})
+								break
+							end    
+						end
+						if isTrue==true then
+							break
+						end
+					end
+					local ff=Instance.new("ForceField")
+					local newVelocity=Instance.new("LinearVelocity",p_forscript.Character)
+					local attach0=Instance.new("Attachment",p_forscript.Character:FindFirstChild("HumanoidRootPart"))
+
+					local force=45000
+					local speed=600
+
+					ff.Parent=p_forscript.Character.HumanoidRootPart
+					newVelocity.MaxForce=force
+					newVelocity.Attachment0=attach0
+					newVelocity.VectorVelocity=p_forscript.Character.PrimaryPart.CFrame.UpVector*speed
+
+					task.wait(4)
+					newVelocity.VectorVelocity=Vector3.new(0,0,0)
+					task.wait(5)
+					starterGUI:SetCore("SendNotification", {
+						Title = "Manager";
+						Text = "Alert: May take a while to tp to finish since game has a caculated time for a regular player to reach the end";
+						Duration = 15;
+					})
+					newVelocity.VectorVelocity=p_forscript.Character.PrimaryPart.CFrame.LookVector*speed
+					task.wait(50)
+
+					p_forscript.Character.PrimaryPart:PivotTo(ve.CFrame)
+					isTrue=false
+					repeat task.wait() until p_forscript.PlayerGui.Hud.GameTimer.Text=="00:01" or p_forscript.PlayerGui.Hud.GameTimer.Visible==false
+					main()
+				end
+
+				main()
 			end)
 
 			--Moves Frame
