@@ -4,7 +4,7 @@ local getHubVersion = "v1"
 local bindable = Instance.new("BindableFunction")
 local starterGUI = game:GetService("StarterGui")
 local ts = game:GetService("TweenService")
-local games = {tonumber("4287812296")--[[x2Hub Game]],tonumber("280343502")--[[Pick A Side]],tonumber("1768079756")--[[just grass]],tonumber("1430993116")--[[literal baseplate]]}
+local games = {tonumber("4287812296")--[[x2Hub Game]],tonumber("280343502")--[[Pick A Side]],tonumber("1768079756")--[[just grass]],tonumber("1430993116")--[[literal baseplate]],tonumber("6708206173")}
 
 
 for i,v in next, games do
@@ -19,12 +19,18 @@ for i,v in next, games do
 				Button2 = "no";
 			})
 		else
+			playerGui:FindFirstChild("x2Hub"):Destroy()
 			starterGUI:SetCore("SendNotification", {
-				Title = "Error";
-				Text = "Already Executed";
-				Duration = 10;
+				Title = "x2Hub";
+				Text = "Do you want to execute x2Hub version: "..getHubVersion.."?";
+				Duration = 40;
+				Callback = bindable;
+				Button1 = "Execute";
+				Button2 = "no";
 			})
 		end
+	else
+		print("not")
 	end
 end
 
@@ -43,9 +49,6 @@ function bindable.OnInvoke(response)
 			Duration = 2;
 		})
 
-
-		wait(3)
-
 		local UserInputService = game:GetService("UserInputService")
 
 		if not playerGui:FindFirstChild("x2Hub") then
@@ -57,14 +60,14 @@ function bindable.OnInvoke(response)
 			local gameLogo, gameLogoRoundify = Instance.new("ImageLabel"), Instance.new("UICorner")
 			local homeButton = Instance.new("TextButton")
 			local mainButton = Instance.new("TextButton")
+			local universalButton = Instance.new("TextButton")
 			local homeFrame, homeFrameRoundify = Instance.new("Frame"), Instance.new("UICorner")
 			local madeByText = Instance.new("TextLabel")
 			local creatorText = Instance.new("TextLabel")
 			local mainGameFrame, mainGameFrameRoundify = Instance.new("ScrollingFrame"), Instance.new("UICorner")
-			local uiGL= Instance.new("UIGridLayout")
-			local feButton1 = Instance.new("TextButton")
+			local uiLL= Instance.new("UIListLayout")
+			local button1 = Instance.new("TextButton")
 			local resetBtn = Instance.new("TextButton")
-			local netlessBtn = Instance.new("TextButton")
 			local exitBtn = Instance.new("TextButton")
 			local minimizeBtn = Instance.new("TextButton")
 
@@ -141,7 +144,6 @@ function bindable.OnInvoke(response)
 
 
 			mainButton.Name="main_button"
-			mainButton.Text="Script Dump"
 			mainButton.Parent=sideFrame
 			mainButton.BackgroundTransparency=0
 			mainButton.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.34902)
@@ -152,7 +154,19 @@ function bindable.OnInvoke(response)
 			mainButton.Font=Enum.Font.SourceSans
 			mainButton.TextScaled=true
 			mainButton.TextSize=14
-
+			
+			universalButton.Name="universal_button"
+			universalButton.Text="Universal"
+			universalButton.Parent=sideFrame
+			universalButton.BackgroundTransparency=0
+			universalButton.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.34902)
+			universalButton.ZIndex=2
+			universalButton.Position=UDim2.new(0.081, 0,0.472, 0)
+			universalButton.Size=UDim2.new(0,161,0,29)
+			universalButton.TextColor3=Color3.new(1, 1, 1)
+			universalButton.Font=Enum.Font.SourceSans
+			universalButton.TextScaled=true
+			universalButton.TextSize=14
 
 			homeFrame.Name="home_frame"
 			homeFrame.Parent=mainFrame
@@ -194,28 +208,26 @@ function bindable.OnInvoke(response)
 			mainGameFrame.BackgroundColor3=Color3.new(0.231373, 0.231373, 0.231373)
 			mainGameFrame.Position=UDim2.new(0.331,0,0.049,0)
 			mainGameFrame.Size=UDim2.new(0, 429,0, 307)
-			
-			uiGL.Name="layout"
-			uiGL.Parent=mainGameFrame
-			uiGL.CellPadding=UDim2.new(0,5,0,5)
-			uiGL.CellSize=UDim2.new(0,125,0,21)
-			uiGL.FillDirection=Enum.FillDirection.Horizontal
-			uiGL.SortOrder=Enum.SortOrder.LayoutOrder
-			uiGL.VerticalAlignment=Enum.VerticalAlignment.Top
-			uiGL.StartCorner=Enum.StartCorner.TopLeft
-			uiGL.FillDirectionMaxCells=3
-			uiGL.HorizontalAlignment=Enum.HorizontalAlignment.Left
-			
 
-			feButton1.Name="fe_block_button"
-			feButton1.Parent=mainGameFrame
-			feButton1.Text="Dual Sword FE"
-			feButton1.ZIndex=2
-			feButton1.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.313725)
-			feButton1.Position=UDim2.new(0.037, 0,0.036, 0)
-			feButton1.Size=UDim2.new(0,125,0,21)
-			feButton1.TextColor3=Color3.new(1,1,1)
-			feButton1.TextScaled=true
+			uiLL.Name="layout"
+			uiLL.Parent=mainGameFrame
+			uiLL.CellPadding=UDim2.new(0,5,0,5)
+			uiLL.CellSize=UDim2.new(0,125,0,21)
+			uiLL.FillDirection=Enum.FillDirection.Vertical
+			uiLL.SortOrder=Enum.SortOrder.LayoutOrder
+			uiLL.VerticalAlignment=Enum.VerticalAlignment.Top
+			uiLL.HorizontalAlignment=Enum.HorizontalAlignment.Center
+
+
+			button1.Name="button1"
+			button1.Parent=mainGameFrame
+			button1.Text="Pick A Side ()"
+			button1.ZIndex=2
+			button1.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.313725)
+			button1.Position=UDim2.new(0.037, 0,0.036, 0)
+			button1.Size=UDim2.new(0,125,0,21)
+			button1.TextColor3=Color3.new(1,1,1)
+			button1.TextScaled=true
 
 			resetBtn.Name="reset_button"
 			resetBtn.Parent=mainFrame
@@ -223,22 +235,11 @@ function bindable.OnInvoke(response)
 			resetBtn.Text="reset"
 			resetBtn.ZIndex=2
 			resetBtn.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.313725)
-			resetBtn.Position=UDim2.new(0.766, 0,0.928, 0)
+			resetBtn.Position=UDim2.new(0.549, 0,0.928, 0)
 			resetBtn.Size=UDim2.new(0,125,0,21)
 			resetBtn.TextColor3=Color3.new(1,1,1)
 			resetBtn.TextScaled=true
 
-			netlessBtn.Name="netless_button"
-			netlessBtn.Parent=mainFrame
-			netlessBtn.Visible = false
-			netlessBtn.Text="Netless"
-			netlessBtn.ZIndex=2
-			netlessBtn.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.313725)
-			netlessBtn.Position=UDim2.new(0.33, 0,0.928, 0)
-			netlessBtn.Size=UDim2.new(0,125,0,21)
-			netlessBtn.TextColor3=Color3.new(1,1,1)
-			netlessBtn.TextScaled=true
-			
 			exitBtn.Name="exit_button"
 			exitBtn.Parent=mainFrame
 			exitBtn.Visible = true
@@ -249,7 +250,7 @@ function bindable.OnInvoke(response)
 			exitBtn.Size=UDim2.new(0,19,0,21)
 			exitBtn.TextColor3=Color3.new(1,1,1)
 			exitBtn.TextScaled=true
-			
+
 			minimizeBtn.Name="minimize_button"
 			minimizeBtn.Parent=mainFrame
 			minimizeBtn.Visible = true
@@ -267,6 +268,20 @@ function bindable.OnInvoke(response)
 				Text="";
 				Duration = 1;
 			})
+			
+			if game.GameId==games[2] then
+				mainButton.Text="Pick A Side"
+			end
+			
+			if mainButton.Text=="Pick A Side" then
+				for i,v in pairs(mainGameFrame:GetDescendants()) do
+					if v:IsA("TextButton") then
+						if not string.find(v.Text,"Pick") then
+							v.Visible=false
+						end
+					end
+				end
+			end
 
 			--close application
 			UserInputService.InputBegan:Connect(function(input)
@@ -277,11 +292,11 @@ function bindable.OnInvoke(response)
 					gui:Destroy()
 				end
 			end)
-			
+
 			exitBtn.MouseButton1Click:Connect(function()
 				gui:Destroy()
 			end)
-			
+
 			minimizeBtn.MouseButton1Click:Connect(function()
 				moveableFrame.Visible=false
 				starterGUI:SetCore("SendNotification", {
@@ -317,7 +332,6 @@ function bindable.OnInvoke(response)
 				end
 				if mainGameFrame.Visible~=false then
 					mainGameFrame.Visible=false
-					netlessBtn.Visible = false
 					resetBtn.Visible=false
 				end	
 			end)
@@ -327,7 +341,6 @@ function bindable.OnInvoke(response)
 				if homeFrame.Visible~=false then
 					homeFrame.Visible=false
 					mainGameFrame.Visible=true
-					netlessBtn.Visible = true
 					resetBtn.Visible=true
 				end
 			end)
@@ -346,14 +359,10 @@ function bindable.OnInvoke(response)
 			resetBtn.MouseButton1Click:Connect(function()
 				player.Character:BreakJoints()
 			end)
-			
-			local function reanimate()
-				--[[not]]
-			end
 
-			--fe block type shit
-			feButton1.MouseButton1Click:Connect(function()
-				--[[for later use]]
+			--auto catch type shit
+			button1.MouseButton1Click:Connect(function()
+				--[[]]
 			end)
 
 			--Moves Frame
