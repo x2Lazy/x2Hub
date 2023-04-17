@@ -32,7 +32,7 @@ end
 if gameFound==false then
 	starterGUI:SetCore("SendNotification", {
 		Title = "Manager";
-		Text = "Game not supported yet. If you want a script for this game message me!";
+		Text = "Game not supported yet. If you want a script for this game message me!: "..tostring(game.GameId);
 		Duration = 15;
 	})
 end
