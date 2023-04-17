@@ -75,7 +75,7 @@ function bindable.OnInvoke(response)
 			local pfp = P:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
 			gui.Name="x2Hub"
-			gui.Parent=playerGui
+			gui.Parent=game:GetService("CoreGui")
 			gui.ResetOnSpawn=false
 
 			moveableFrame.Name="move_frame"
