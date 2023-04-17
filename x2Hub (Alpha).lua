@@ -405,6 +405,11 @@ function bindable.OnInvoke(response)
 
 					p_forscript.Character.PrimaryPart:PivotTo(ve.CFrame)
 					isTrue=false
+					starterGUI:SetCore("SendNotification", {
+						Title = "Manager";
+						Text = "Waiting for round to end";
+						Duration = 15;
+					})	
 					repeat task.wait() until p_forscript.PlayerGui.Hud.GameTimer.Text=="00:01" or p_forscript.PlayerGui.Hud.GameTimer.Visible==false
 					main()
 				end
