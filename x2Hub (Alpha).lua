@@ -6,7 +6,7 @@ local getHubVersion = "v1"
 local bindable = Instance.new("BindableFunction")
 local starterGUI = game:GetService("StarterGui")
 local ts = game:GetService("TweenService")
-local games = {4287812296,280343502,1768079756,3319240411}
+local games = {4287812296,280343502,1768079756,3319240411,}
 local gameFound=false
 
 for i,v in next, games do
@@ -38,7 +38,7 @@ end
 if gameFound==false then
 	starterGUI:SetCore("SendNotification", {
 		Title = "Manager";
-		Text = "Game not supported yet. If you want a script for this game message me!";
+		Text = "Game not supported yet. If you want a script for this game message me! Current Game ID: "..tostring(game.GameId);
 		Duration = 15;
 	})
 end
@@ -76,6 +76,7 @@ function bindable.OnInvoke(response)
 			local mainGameFrame, mainGameFrameRoundify = Instance.new("ScrollingFrame"), Instance.new("UICorner")
 			local uiLL= Instance.new("UIListLayout")
 			local avalanche = Instance.new("TextButton")
+			local workatapizzaplace_tptomanager = Instance.new("TextButton")
 			local resetBtn = Instance.new("TextButton")
 			local exitBtn = Instance.new("TextButton")
 			local minimizeBtn = Instance.new("TextButton")
@@ -215,15 +216,25 @@ function bindable.OnInvoke(response)
 			uiLL.HorizontalAlignment=Enum.HorizontalAlignment.Center
 
 
-			avalanche.Name="Avalanche Game Bullshit"
+			avalanche.Name="avalanche_1"
 			avalanche.Parent=mainGameFrame
-			avalanche.Text="Pick A Side Bullshit"
+			avalanche.Text="Avalanche Game Bullshit"
 			avalanche.ZIndex=2
 			avalanche.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.313725)
 			avalanche.Position=UDim2.new(0.037, 0,0.036, 0)
 			avalanche.Size=UDim2.new(0,125,0,21)
 			avalanche.TextColor3=Color3.new(1,1,1)
 			avalanche.TextScaled=true
+			
+			workatapizzaplace_tptomanager.Name="waapp_1"
+			workatapizzaplace_tptomanager.Parent=mainGameFrame
+			workatapizzaplace_tptomanager.Text="Work at a Pizza Place (TP To Manager Whatever shit)"
+			workatapizzaplace_tptomanager.ZIndex=2
+			workatapizzaplace_tptomanager.BackgroundColor3=Color3.new(0.313725, 0.313725, 0.313725)
+			workatapizzaplace_tptomanager.Position=UDim2.new(0.037, 0,0.036, 0)
+			workatapizzaplace_tptomanager.Size=UDim2.new(0,125,0,21)
+			workatapizzaplace_tptomanager.TextColor3=Color3.new(1,1,1)
+			workatapizzaplace_tptomanager.TextScaled=true
 
 			resetBtn.Name="reset_button"
 			resetBtn.Parent=mainFrame
@@ -405,11 +416,6 @@ function bindable.OnInvoke(response)
 
 					p_forscript.Character.PrimaryPart:PivotTo(ve.CFrame)
 					isTrue=false
-					starterGUI:SetCore("SendNotification", {
-						Title = "Manager";
-						Text = "Waiting for round to end";
-						Duration = 15;
-					})	
 					repeat task.wait() until p_forscript.PlayerGui.Hud.GameTimer.Text=="00:01" or p_forscript.PlayerGui.Hud.GameTimer.Visible==false
 					main()
 				end
