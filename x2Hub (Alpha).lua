@@ -426,7 +426,7 @@ function bindable.OnInvoke(response)
 			
 			workatapizzaplace_tptomanager.MouseButton1Click:Connect(function()
 				local managerSeat=game:GetService("Workspace").ManagerChair.Seat
-				player.Character.PrimaryPart.CFrame=managerSeat.CFrame
+				player.Character.PrimaryPart:PivotTo(managerSeat.CFrame+Vector3.new(0,4,0))
 			end)
 
 			--Moves Frame
