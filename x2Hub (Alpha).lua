@@ -4,7 +4,7 @@ local getHubVersion = "v1"
 local bindable = Instance.new("BindableFunction")
 local starterGUI = game:GetService("StarterGui")
 local ts = game:GetService("TweenService")
-local games = {4287812296,280343502,1768079756,8743251051}
+local games = {4287812296,280343502,1768079756,3319240411}
 local gameFound=false
 
 for i,v in next, games do
@@ -32,7 +32,7 @@ end
 if gameFound==false then
 	starterGUI:SetCore("SendNotification", {
 		Title = "Manager";
-		Text = "Game not supported yet. If you want a script for this game message me!: "..tostring(game.GameId);
+		Text = "Game not supported yet. If you want a script for this game message me!";
 		Duration = 15;
 	})
 end
